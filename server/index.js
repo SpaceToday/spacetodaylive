@@ -5,7 +5,6 @@ import { connect } from './db';
 import passportConfig from './config/passport';
 import expressConfig from './config/express';
 import routesConfig from './config/routes';
-import webpackDevConfig from '../webpack/webpack.config.dev-client';
 const App = require('../public/assets/server');
 const app = express();
 
@@ -22,6 +21,7 @@ connect();
 passportConfig();
 
 if (ENV === 'development') {
+  const webpackDevConfig = require('../webpack/webpack.config.dev-client');
   const compiler = webpack(webpackDevConfig);
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
