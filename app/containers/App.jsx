@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import Navigation from 'containers/Navigation';
-import Message from 'containers/Message';
-import classNames from 'classnames/bind';
-import styles from 'css/main';
+import { Button, ResponsiveEmbed } from 'react-bootstrap';
 
-const cx = classNames.bind(styles);
 
 
 /*
@@ -18,9 +15,8 @@ const cx = classNames.bind(styles);
  */
 const App = ({children}) => {
   return (
-    <div className={cx('app')}>
+    <div >
       <Navigation />
-      <Message />
         {children}
     </div>
   );

@@ -27,8 +27,9 @@ export default (app) => {
     // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
     app.get('/auth/google', passport.authenticate('google', {
       scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
+          'https://www.googleapis.com/auth/youtube.readonly',
+          'https://www.googleapis.com/auth/userinfo.profile',
+          'https://www.googleapis.com/auth/userinfo.email'
       ]
     }));
 

@@ -1,10 +1,11 @@
+import fs from 'fs';
 /** Important **/
 /** You should not be committing this file to GitHub **/
 /** Repeat: DO! NOT! COMMIT! THIS! FILE! TO! YOUR! REPO! **/
 export const sessionSecret = process.env.SESSION_SECRET || 'Your Session Secret goes here';
 export const google = {
-  clientID: process.env.GOOGLE_CLIENTID || '62351010161-eqcnoa340ki5ekb9gvids4ksgqt9hf48.apps.googleusercontent.com',
-  clientSecret: process.env.GOOGLE_SECRET || '6cKCWD75gHgzCvM4VQyR5_TU',
+  clientID: process.env.GOOGLE_CLIENTID || JSON.parse(fs.readFileSync('server/config/client_secret.json', 'utf8')).web.client_id,
+  clientSecret: process.env.GOOGLE_SECRET || JSON.parse(fs.readFileSync('server/config/client_secret.json', 'utf8')).web.client_secret,
   callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback'
 };
 

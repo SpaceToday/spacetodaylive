@@ -1,10 +1,21 @@
 import React, { PropTypes } from 'react';
-import TopicTextInput from 'components/TopicTextInput';
-import classNames from 'classnames/bind';
-import styles from 'css/components/entrybox';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-const cx = classNames.bind(styles);
 
+const EntryBox = () => {
+    return (
+        <form>
+            <FormGroup controlId="formControlsTextarea">
+                <ControlLabel>Pergunta</ControlLabel>
+                <FormControl componentClass="textarea" placeholder="Pergunte algo interessante" />
+            </FormGroup>
+            <Button type="submit">
+                Enviar
+            </Button>
+        </form>
+    );
+}
+/*
 // Takes callback functions from props and passes it down to TopicTextInput
 // Essentially this is passing the callback function two levels down from parent
 // to grandchild. To make it cleaner, you could consider:
@@ -29,5 +40,5 @@ EntryBox.propTypes = {
   onEntryChange: PropTypes.func.isRequired,
   onEntrySave: PropTypes.func.isRequired
 };
-
+*/
 export default EntryBox;

@@ -40,25 +40,6 @@ export function loginError(message) {
   };
 }
 
-// Sign Up Action Creators
-export function signUpError(message) {
-  return {
-    type: types.SIGNUP_ERROR_USER,
-    message
-  };
-}
-
-export function beginSignUp() {
-  return { type: types.SIGNUP_USER };
-}
-
-export function signUpSuccess(message) {
-  return {
-    type: types.SIGNUP_SUCCESS_USER,
-    message
-  };
-}
-
 // Log Out Action Creators
 export function beginLogout() {
   return { type: types.LOGOUT_USER};
@@ -76,43 +57,6 @@ export function toggleLoginMode() {
   return { type: types.TOGGLE_LOGIN_MODE };
 }
 
-export function manualLogin(data) {
-  return dispatch => {
-    dispatch(beginLogin());
-
-    return makeUserRequest('post', data, '/login')
-      .then(response => {
-        if (response.status === 200) {
-          dispatch(loginSuccess(response.data.message));
-          dispatch(push('/'));
-        } else {
-          dispatch(loginError('Oops! Something went wrong!'));
-        }
-      })
-      .catch(err => {
-        dispatch(loginError(getMessage(err)));
-      });
-  };
-}
-
-export function signUp(data) {
-  return dispatch => {
-    dispatch(beginSignUp());
-
-    return makeUserRequest('post', data, '/signup')
-      .then(response => {
-        if (response.status === 200) {
-          dispatch(signUpSuccess(response.data.message));
-          dispatch(push('/'));
-        } else {
-          dispatch(signUpError('Oops! Something went wrong'));
-        }
-      })
-      .catch(err => {
-        dispatch(signUpError(getMessage(err)));
-      });
-  };
-}
 
 export function logOut() {
   return dispatch => {

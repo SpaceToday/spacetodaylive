@@ -2,29 +2,27 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logOut } from 'actions/users';
-
-import classNames from 'classnames/bind';
-import styles from 'css/components/navigation';
-
-const cx = classNames.bind(styles);
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 const Navigation = ({ user, logOut }) => {
     return (
-      <nav className={cx('navigation')} role="navigation">
-        <Link to="/"
-          className={cx('item', 'logo')}
-          activeClassName={cx('active')}>Ninja Ocean</Link>
-          { user.authenticated ? (
-            <Link onClick={logOut}
-              className={cx('item')} to="/">Logout</Link>
-          ) : (
-            <Link className={cx('item')} to="/login">Log in</Link>
-          )}
-          <Link className={cx('item')} to="/dashboard">Dashboard</Link>
-          <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
-      </nav>
-    );
-};
+        <Navbar>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    <a href="/">Space Today Live</a>
+                </Navbar.Brand>
+            </Navbar.Header>
+            <Nav>
+                { user.authenticated ? (
+                    <NavItem onClick={logOut} href="/">Logout</NavItem>
+                ) : (
+                    <NavItem eventKey={1} href="/auth/google">Login</NavItem>
+                )}
+            </Nav>
+        </Navbar>
+    )
+}
+
 
 Navigation.propTypes = {
   user: PropTypes.object,
