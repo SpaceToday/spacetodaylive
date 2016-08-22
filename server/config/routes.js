@@ -39,7 +39,7 @@ export default (app) => {
     app.get('/auth/google/callback',
       passport.authenticate('google', {
         successRedirect: '/',
-        failureRedirect: '/login'
+        failureRedirect: '/'
       })
     );
   }

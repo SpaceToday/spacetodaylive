@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
 
-const EntryBox = () => {
+const EntryBox = ({makeQuestion}) => {
     return (
         <form>
             <FormGroup controlId="formControlsTextarea">
                 <ControlLabel>Pergunta</ControlLabel>
                 <FormControl componentClass="textarea" placeholder="Pergunte algo interessante" />
             </FormGroup>
-            <Button type="submit">
+            <Button >
                 Enviar
             </Button>
         </form>
