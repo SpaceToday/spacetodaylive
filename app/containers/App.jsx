@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Navigation from 'containers/Navigation';
 import { Button, ResponsiveEmbed } from 'react-bootstrap';
 
@@ -13,10 +14,10 @@ import { Button, ResponsiveEmbed } from 'react-bootstrap';
  * A better explanation of react-router is available here:
  * https://github.com/rackt/react-router/blob/latest/docs/Introduction.md
  */
-const App = ({children}) => {
+const App = ({ children, vid }) => {
   return (
     <div >
-      <Navigation />
+      <Navigation vid={vid}  />
         {children}
     </div>
   );
@@ -26,4 +27,10 @@ App.propTypes = {
   children: PropTypes.object
 };
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    return {
+        vid: ownProps.params.id
+    }
+}
+
+export default connect(mapStateToProps)(App);

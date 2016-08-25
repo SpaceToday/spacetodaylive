@@ -26,9 +26,10 @@ export function login(req, res, next) {
  * POST /logout
  */
 export function logout(req, res) {
-  // Do email and password validation for the server
-  req.logout();
-  res.redirect('/');
+    // Do email and password validation for the server
+    req.logout();
+    let redirectUrl = req.query.state?req.query.state:"";
+    res.redirect(`/${redirectUrl}`);
 }
 
 /**
@@ -58,8 +59,14 @@ export function signUp(req, res, next) {
   });
 }
 
+export function owner (req, res, next) {
+    
+
+}
+
 export default {
   login,
   logout,
-  signUp
+  signUp,
+  owner
 };

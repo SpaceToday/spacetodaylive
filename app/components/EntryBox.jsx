@@ -1,15 +1,28 @@
 import React, { PropTypes } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Panel } from 'react-bootstrap';
 
 
-const EntryBox = ({makeQuestion}) => {
+const EntryBox = ({makeQuestion, typingQuestion, textOnBox, vid}) => {
+
+    const handleChange = (e) => {
+        typingQuestion(e.target.value);
+    }
+
+    const sendButton = () => {
+        makeQuestion(vid);
+    }
+
     return (
         <form>
             <FormGroup controlId="formControlsTextarea">
                 <ControlLabel>Pergunta</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="Pergunte algo interessante" />
+                <FormControl
+                    componentClass="textarea"
+                    placeholder="Pergunte algo interessante"
+                    onChange={handleChange}
+                    value={textOnBox} />
             </FormGroup>
-            <Button >
+            <Button onClick={sendButton}>
                 Enviar
             </Button>
         </form>

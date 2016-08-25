@@ -57,7 +57,9 @@ export default function render(req, res) {
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true
+      isLogin: true,
+      profile: authenticated ? req.user.profile : false,
+      google: authenticated ? req.user.google : false
     }
   }, history);
   const routes = createRoutes(store);

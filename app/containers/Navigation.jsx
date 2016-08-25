@@ -4,21 +4,28 @@ import { connect } from 'react-redux';
 import { logOut } from 'actions/users';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
-const Navigation = ({ user, logOut }) => {
+const Navigation = ({ user, logOut, vid }) => {
+    const authUrl = `/auth/google?vid=${vid}`;
     return (
-        <Navbar>
+        <Navbar inverse>
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">Space Today Live</a>
                 </Navbar.Brand>
+                <Navbar.Toggle />
             </Navbar.Header>
-            <Nav>
+            <Navbar.Collapse>
+                <Nav>
+                    { user.authenticated ? (
+                        <NavItem onClick={logOut} >Logout</NavItem>
+                    ) : (
+                        <NavItem eventKey={1} href={authUrl}>Login</NavItem>
+                    )}
+                </Nav>
                 { user.authenticated ? (
-                    <NavItem onClick={logOut} href="/">Logout</NavItem>
-                ) : (
-                    <NavItem eventKey={1} href="/auth/google">Login</NavItem>
-                )}
-            </Nav>
+                    <Navbar.Text pullRight> { user.profile.name } </Navbar.Text>
+                ) : "" }
+            </Navbar.Collapse>
         </Navbar>
     )
 }
@@ -29,10 +36,11 @@ Navigation.propTypes = {
   logOut: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    user: state.user
-  };
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user,
+        vid: ownProps.vid
+    };
 }
 
-export default connect(mapStateToProps, { logOut })(Navigation);
+export default connect( mapStateToProps, { logOut })(Navigation);

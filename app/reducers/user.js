@@ -64,11 +64,33 @@ const authenticated = (
   }
 };
 
+const profile = (
+    state = false,
+    action
+) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+}
+
+const google = (
+    state = false,
+    action
+) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+}
+
 const userReducer = combineReducers({
   isLogin,
   isWaiting,
   authenticated,
-  message
+  message,
+  profile,
+  google
 });
 
 export default userReducer;

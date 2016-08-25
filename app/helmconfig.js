@@ -10,9 +10,9 @@
  */
 
 // Import all your needed files first (webpack will grab the url)
-import chromecon from 'images/chrome-ninja192-precomposed.png';
-import applecon from 'images/apple-ninja152-precomposed.png';
-import mscon from 'images/ms-ninja144-precomposed.png';
+import chromecon from 'images/favicon-196x196.png';
+import applecon from 'images/apple-touch-icon-152x152.png';
+import mscon from 'images/mstile-144x144.png';
 import favicon from 'images/favicon.png';
 
 const config = {

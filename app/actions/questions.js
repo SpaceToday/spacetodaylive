@@ -11,9 +11,72 @@ export function makeQuestionRequest(method, id, data, api = '/question') {
     return request[method](api + (id ? ('/' + id) : ''), data);
 }
 
+export function createQuestionRequest(){
+    return {
+        type: types.CREATE_QUESTION_REQUEST
+    }
+}
 
-export function createQuestion(){
+export function createQuestionSuccess(){
+    return {
+        type: types.CREATE_QUESTION_SUCCESS
+    }
+}
+
+export function typing(text) {
+  return {
+    type: types.QUESTION_TYPING,
+    newQuestion: text
+  };
+}
+
+
+export function createQuestion(vid){
     return (dispatch, getState) => {
-        return makeQuestionRequest("post")
+        let data = {
+            text: getState().question.newQuestion
+        }
+
+        dispatch(createQuestionRequest());
+
+        return request['post'](`/question/${vid}`, data)
+        .then(() => {
+            dispatch(createQuestionSuccess());
+            return dispatch(fecthQuestions(vid));
+        })
+        .catch(()=>{
+            //TODO
+            return dispatch(fecthQuestions(vid));
+        });
+    }
+}
+
+export function fecthQuestions(vid){
+    return {
+        type: types.GET_QUESTIONS,
+        promise: request['get'](`/question/${vid}`)
+    }
+}
+
+export function thumbsUpSuccess(qid){
+    return {
+        type: types.QUESTION_THUMBSUP,
+        qid
+    }
+}
+
+export function thumbsUp(vid, qid){
+    return (dispatch, getState) => {
+        return request['put'](`/question/${vid}/${qid}`, {thumbsUp: true})
+        .then(res => {
+            if(res.status == 200){
+                dispatch(thumbsUpSuccess(qid));
+                return dispatch(fecthQuestions(vid));
+            }
+        })
+        .catch(()=>{
+            //TODO
+            return dispatch(fecthQuestions(vid));
+        });
     }
 }

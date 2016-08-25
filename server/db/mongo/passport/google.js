@@ -2,7 +2,6 @@ import User from '../models/user';
 
 /* eslint-disable no-param-reassign */
 export default (req, accessToken, refreshToken, profile, done) => {
-    console.log("db/mongo/passport");
   if (req.user) {
     return User.findOne({ google: profile.id }, (findOneErr, existingUser) => {
       if (existingUser) {

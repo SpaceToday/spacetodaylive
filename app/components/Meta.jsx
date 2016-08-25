@@ -15,7 +15,7 @@ if (__DEVSERVER__) {
 const Meta = () => (
   <Helmet
     htmlAttributes={{"lang": "en", "amp": undefined}}
-    title="React Webpack Node" meta={config.meta}
+    title="SPACE TODAY LIVE" meta={config.meta}
     link={config.link}
   />
 )

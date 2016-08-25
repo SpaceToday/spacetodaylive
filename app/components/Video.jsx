@@ -15,7 +15,6 @@ const Video = ({vid}) => {
 
 
 function mapStateToProps(state, ownProps) {
-    console.log('video', ownProps);
     return {
         user: state.user,
         vid: ownProps.vid
