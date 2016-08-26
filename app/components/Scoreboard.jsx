@@ -5,12 +5,12 @@ import VoteSystem from 'components/VoteSystem';
 const Scoreboard = ({ questions, vid, user }) => {
     const questionListItems = questions.sort((a,b) => {return b.count - a.count})
     .map((question, key) => {
+
         return (
-            <ListGroupItem key={key} bsStyle={question.user.google==user.google?'info':''}>
-                <p>
+            //TODO add style to my message
+            <ListGroupItem key={key} >
                     <VoteSystem vid={vid} question={question} />
-                    {question.user.profile.name}
-                </p>
+                    <p>{question.user.profile.name}</p>
                 {question.text}
             </ListGroupItem>
         );
