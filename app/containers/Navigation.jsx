@@ -3,18 +3,19 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logOut } from 'actions/users';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Header, Collapse, Brand, Toggle, Text } from 'react-bootstrap/lib/Navbar';
 
 const Navigation = ({ user, logOut, vid }) => {
     const authUrl = `/auth/google?vid=${vid}`;
     return (
         <Navbar inverse>
-            <Navbar.Header>
-                <Navbar.Brand>
+            <Header>
+                <Brand>
                     <a href="/">Space Today Live</a>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
+                </Brand>
+                <Toggle />
+            </Header>
+            <Collapse>
                 <Nav>
                     { user.authenticated ? (
                         <NavItem onClick={logOut} >Logout</NavItem>
@@ -23,9 +24,9 @@ const Navigation = ({ user, logOut, vid }) => {
                     )}
                 </Nav>
                 { user.authenticated ? (
-                    <Navbar.Text pullRight> { user.profile.name } </Navbar.Text>
+                    <Text pullRight> { user.profile.name } </Text>
                 ) : "" }
-            </Navbar.Collapse>
+            </Collapse>
         </Navbar>
     )
 }
