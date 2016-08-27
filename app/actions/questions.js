@@ -65,14 +65,14 @@ export function thumbsUpSuccess(qid){
     }
 }
 
-export function thumbsUp(vid, qid){
+export function thumbsUp(vid, qid, up){
     return (dispatch, getState) => {
-        return request['put'](`/question/${vid}/${qid}`, {thumbsUp: true})
+        return request['put'](`/question/${vid}/${qid}`, {thumbsUp: up})
         .then(res => {
             if(res.status == 200){
                 dispatch(thumbsUpSuccess(qid));
-                return dispatch(fecthQuestions(vid));
             }
+            return dispatch(fecthQuestions(vid));
         })
         .catch(()=>{
             //TODO

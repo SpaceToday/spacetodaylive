@@ -2,22 +2,29 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button, ResponsiveEmbed, Well, Badge, Glyphicon } from 'react-bootstrap';
 import { thumbsUp } from 'actions/questions';
+import FontAwesome from 'react-fontawesome';
 
 const VoteSystem = ({ vid, question, user, thumbsUp }) => {
 
+    const hasVoted = question.thumbsUp.some(e=>e==user.google);
+
     const thumbsUpClick = () => {
-        thumbsUp(vid, question.id);
+        console.log('HAS VOTED', hasVoted);
+        thumbsUp(vid, question.id, !hasVoted);
     }
 
     return(
         <div>
-            <Button bsSize="xsmall" onClick={thumbsUpClick}>
-                <Glyphicon glyph="arrow-up" />
-            </Button>
+            { question.thumbsUp.some(e=>e==user.google) ?(
+                <Button bsSize="xsmall" bsStyle='info' onClick={thumbsUpClick}>
+                    <FontAwesome name='rocket' />
+                </Button>
+            ):(
+                <Button bsSize="xsmall" onClick={thumbsUpClick}>
+                    <FontAwesome name='rocket' />
+                </Button>
+            )}
             <Badge>{question.count}</Badge>
-            <Button bsSize="xsmall" >
-                <Glyphicon glyph="arrow-down" />
-            </Button>
         </div>
     );
 };

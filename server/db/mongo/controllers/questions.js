@@ -14,8 +14,8 @@ export function all(req, res) {
 }
 
 export function add(req, res) {
-    const id = md5.hash(`${req.body.text}${req.user.google}`);
-    let data = {
+    const id = md5.hash(`${req.body.text}${req.user.google}${req.params.vid}`);
+    const data = {
         id,
         user : {
             google: req.user.google,
@@ -34,22 +34,26 @@ export function add(req, res) {
 }
 
 export function update(req, res){
+    const { user, params, body : { thumbsUp : isIncrement } } = req;
     const query = {
-        id: req.params.qid,
-        vid: req.params.vid
+        id: params.qid,
+        vid: params.vid
     }
-
-    let isIncrement = req.body.thumbsUp;
 
     Question.findOne(query, (err, question) => {
         if (err) {
             console.log('Error on query!');
             return res.status(500).send('We failed to save for some reason');
         }
-        const haveAlready = question.thumbsUp.some((e)=>e==req.user.google)
+        const haveAlready = question.thumbsUp.some((e)=>e==user.google);
 
-        if(isIncrement && !haveAlready){
-            question.thumbsUp.push(req.user.google);
+        if(isIncrement && !haveAlready || !isIncrement && haveAlready){
+            if(isIncrement){
+                question.thumbsUp.push(user.google);
+            }
+            else {
+                question.thumbsUp = question.thumbsUp.filter(e=>e!=user.google);
+            }
             question.count = question.thumbsUp.length;
             question.save((err)=>{
                 if(err){
