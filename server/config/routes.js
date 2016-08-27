@@ -67,5 +67,3 @@ export default (app) => {
     console.warn(unsupportedMessage('topics routes'));
   }
 };
-
-// https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/oauth2/v2/auth?scope%3Dhttps://www.googleapis.com/auth/youtube.readonly%2Bhttps://www.googleapis.com/auth/userinfo.profile%2Bhttps://www.googleapis.com/auth/userinfo.email%26response_type%3Dcode%26redirect_uri%3Dhttp://localhost:3000/auth/google/callback%26client_id%3D152848339334-fjm7apvmhc18ogrh55uohkvefi9vi11a.apps.googleusercontent.com%26from_login%3D1%26as%3D-4fe24ea75a83aa59&ltmpl=nosignup&btmpl=authsub&scc=1&oauth=1
