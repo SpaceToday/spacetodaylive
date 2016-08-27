@@ -21,10 +21,10 @@ export default class ScorePanel extends Component{
     }
 
     render(){
-        const { questions, vid, user } = this.props;
+        const { vid } = this.props;
         return(
             <Panel header="Perguntas em Orbita" >
-                <Scoreboard fill questions={questions} vid={vid} user={user} />
+                <Scoreboard fill vid={vid} />
             </Panel>
         )
     }

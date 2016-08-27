@@ -65,12 +65,39 @@ export function update(req, res){
         }else{
             return res.status(406).send('Denied');
         }
+    });
+}
 
+export function remove(req, res){
+    const { user, params, body : { thumbsUp : isIncrement } } = req;
+    const query = {
+        id: params.qid,
+        vid: params.vid
+    }
+    Question.findOne(query, (err, question) => {
+        if (err) {
+            console.log('Error on delete');
+            return res.status(500).send('We failed to delete for some reason');
+        }
+
+        //TODO add owner of video
+        if(question.user.google==user.google){
+            question.remove((err) => {
+                if (err) {
+                    console.log('Error on delete');
+                    return res.status(500).send('We failed to delete for some reason');
+                }
+                return res.status(200).send('Removed Successfully');
+            })
+        }else{
+            return res.status(406).send('Denied');
+        }
     });
 }
 
 export default {
     all,
     add,
-    update
+    update,
+    remove
 }

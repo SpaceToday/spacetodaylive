@@ -7,7 +7,7 @@ import ScorePanel from 'components/ScorePanel';
 import { createQuestion, typing, fecthQuestions } from 'actions/questions';
 import FontAwesome from 'react-fontawesome';
 
-const Main = ({ user, vid, createQuestion, typing, textOnBox, questions, fecthQuestions }) => {
+const Main = ({ user, vid, createQuestion, typing, textOnBox, fecthQuestions }) => {
     const authUrl = `/auth/google?vid=${vid}`;
     return (
       <Grid fluid>
@@ -30,10 +30,8 @@ const Main = ({ user, vid, createQuestion, typing, textOnBox, questions, fecthQu
               </Col>
               <Col sm={5}>
                   <ScorePanel
-                      questions={questions}
                       fecthQuestions={fecthQuestions}
-                      vid={vid}
-                      user={user} />
+                      vid={vid} />
               </Col>
           </Row>
       </Grid>
@@ -45,8 +43,7 @@ function mapStateToProps(state, ownProps) {
     return {
         user: state.user,
         vid: ownProps.params.id,
-        textOnBox: state.question.newQuestion,
-        questions: state.question.questions
+        textOnBox: state.question.newQuestion
     };
 }
 

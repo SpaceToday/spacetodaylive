@@ -15,14 +15,18 @@ const VoteSystem = ({ vid, question, user, thumbsUp }) => {
 
     return(
         <div>
-            { question.thumbsUp.some(e=>e==user.google) ?(
-                <Button bsSize="xsmall" bsStyle='info' onClick={thumbsUpClick}>
-                    <FontAwesome name='rocket' />
-                </Button>
+            {user.authenticated?
+                 hasVoted ?(
+                    <Button bsSize="xsmall" bsStyle='info' onClick={thumbsUpClick}>
+                        <FontAwesome name='rocket' />
+                    </Button>
+                ):(
+                    <Button bsSize="xsmall" onClick={thumbsUpClick}>
+                        <FontAwesome name='rocket' />
+                    </Button>
+
             ):(
-                <Button bsSize="xsmall" onClick={thumbsUpClick}>
-                    <FontAwesome name='rocket' />
-                </Button>
+                <div></div>
             )}
             <Badge>{question.count}</Badge>
         </div>

@@ -54,6 +54,7 @@ export default (app) => {
       app.get('/question/:vid', questionsController.all);
       app.post('/question/:vid', questionsController.add);
       app.put('/question/:vid/:qid', questionsController.update);
+      app.delete('/question/:vid/:qid', questionsController.remove);
   }else{
       console.console.warn(unsupportedMessage('questions routes'));
   }

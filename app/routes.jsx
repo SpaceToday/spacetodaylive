@@ -3,7 +3,6 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from 'containers/App';
 import Main from 'containers/Main';
-import About from 'containers/About';
 import Intro from 'containers/Intro';
 
 /*
@@ -36,7 +35,6 @@ export default (store) => {
     <Route path="/" component={App}>
       <IndexRoute component={Intro} />
       <Route path="/:id" component={Main} />
-      <Route path="about" component={About} />
     </Route>
   );
 };

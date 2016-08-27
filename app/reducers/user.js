@@ -69,6 +69,8 @@ const profile = (
     action
 ) => {
     switch (action.type) {
+        case types.LOGOUT_SUCCESS_USER:
+            return false;
         default:
             return state;
     }
@@ -79,18 +81,20 @@ const google = (
     action
 ) => {
     switch (action.type) {
+        case types.LOGOUT_SUCCESS_USER:
+            return false;
         default:
             return state;
     }
 }
 
 const userReducer = combineReducers({
-  isLogin,
-  isWaiting,
-  authenticated,
-  message,
-  profile,
-  google
+    isLogin,
+    isWaiting,
+    authenticated,
+    message,
+    profile,
+    google
 });
 
 export default userReducer;
