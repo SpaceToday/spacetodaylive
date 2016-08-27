@@ -18,9 +18,8 @@ const Navigation = ({ user, logOut, vid }) => {
             <Collapse>
                 { user.authenticated ? (
                     <Nav pullRight>
-                        <NavDropdown title={user.profile.name} >
-                            <Image src={user.profile.picture} responsive circle />
-                            <MenuItem onClick={logOut}>
+                        <NavDropdown title={user.profile.name} id="user-dropdown">
+                            <MenuItem eventKey="1" onClick={logOut}>
                                 Log out
                             </MenuItem>
                         </NavDropdown>
