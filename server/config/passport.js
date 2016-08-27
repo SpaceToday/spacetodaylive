@@ -2,6 +2,7 @@
 import passport from 'passport';
 import local from './passport/local';
 import google from './passport/google';
+import youtube from './passport/youtube';
 import { passport as dbPassport } from '../db';
 import unsupportedMessage from '../db/unsupportedMessage';
 
@@ -26,5 +27,6 @@ export default () => {
 
   // use the following strategies
   local(passport);
-  google(passport);
+  //google(passport);
+  youtube(passport);
 };

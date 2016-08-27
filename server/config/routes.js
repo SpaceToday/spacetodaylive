@@ -27,26 +27,24 @@ export default (app) => {
     // /auth/google/return
     // Authentication with google requires an additional scope param, for more info go
     // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
-    app.get('/auth/google',(req, res) => {
-        passport.authenticate('google', {
+    app.get('/auth/google',(req, res, next) => {
+        passport.authenticate('youtube', {
             scope: [
-                'https://www.googleapis.com/auth/youtube.readonly',
-                'https://www.googleapis.com/auth/userinfo.profile',
-                'https://www.googleapis.com/auth/userinfo.email'
+                'https://www.googleapis.com/auth/youtube.readonly'
             ],
             state: req.query.vid
-        })(req, res);
+        })(req, res, next);
     });
 
     // Google will redirect the user to this URL after authentication. Finish the
     // process by verifying the assertion. If valid, the user will be logged in.
     // Otherwise, the authentication has failed.
-    app.get('/auth/google/callback', (req, res) => {
-        let redirectUrl = req.query.state?req.query.state:"";
-        passport.authenticate('google', {
+    app.get('/auth/google/callback', (req, res, next) => {
+        const redirectUrl = req.query.state?req.query.state:"";
+        passport.authenticate('youtube', {
             successRedirect: `/${redirectUrl}`,
             failureRedirect: `/${redirectUrl}`
-        })(req, res);
+        })(req, res, next);
     });
   }
 
