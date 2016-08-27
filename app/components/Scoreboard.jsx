@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Panel, ListGroup, ListGroupItem, Grid, Row, Col, Label, Button, Well, Jumbotron } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Grid, Row, Col, Label, Button, Well, Jumbotron, Media, Image } from 'react-bootstrap';
+import { List as MediaList, Body as MediaBody, Left as MediaLeft, Heading as MediaHeading, ListItem as MediaListItem } from 'react-bootstrap/lib/Media';
 import FontAwesome from 'react-fontawesome';
 import VoteSystem from 'components/VoteSystem';
 import { connect } from 'react-redux';
@@ -15,38 +16,24 @@ const Scoreboard = ({ questions, vid, user, remove }) => {
         }
         return (
             //TODO add style to my message
-            <ListGroupItem key={key} >
-                <Grid fluid>
-                    <Row>
-                        <Col xs={3}>
-                            <VoteSystem vid={vid} question={question} />
-                        </Col>
-                        <Col xs={7}>
-                             {question.user.profile.name}
-                        </Col>
-                        <Col xs={2}>
-                            { user.authenticated && user.google==question.user.google?(
-                                <Button bsSize="xsmall" bsStyle='danger' onClick={clickRemove}>
-                                    <FontAwesome name='trash' />
-                                </Button>
-                            ):(
-                                <div></div>
-                            ) }
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Well bsSize="small">{question.text}</Well>
-                        </Col>
-                    </Row>
-                </Grid>
-            </ListGroupItem>
+            <MediaListItem key={key} >
+                <MediaLeft>
+                    <Image width={32} height={32} src={question.user.profile.picture} circle />
+                </MediaLeft>
+                <MediaBody>
+                    <MediaHeading>
+                        <VoteSystem question={question} vid={vid} />
+                        {question.user.profile.name}
+                    </MediaHeading>
+                    {question.text}
+                </MediaBody>
+            </MediaListItem>
         );
     });
     return (
-        <ListGroup>
+        <MediaList>
             {questionListItems}
-        </ListGroup>
+        </MediaList>
     );
 };
 

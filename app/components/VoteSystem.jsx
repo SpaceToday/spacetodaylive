@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button, ResponsiveEmbed, Well, Badge, Glyphicon } from 'react-bootstrap';
-import { thumbsUp } from 'actions/questions';
+import { thumbsUp, remove } from 'actions/questions';
 import FontAwesome from 'react-fontawesome';
 
-const VoteSystem = ({ vid, question, user, thumbsUp }) => {
+
+const VoteSystem = ({ vid, question, user, thumbsUp, remove }) => {
 
     const hasVoted = question.thumbsUp.some(e=>e==user.google);
 
@@ -12,6 +13,13 @@ const VoteSystem = ({ vid, question, user, thumbsUp }) => {
         console.log('HAS VOTED', hasVoted);
         thumbsUp(vid, question.id, !hasVoted);
     }
+
+    const clickRemove = () => {
+        console.log('HERE');
+        remove(vid, question.id);
+    }
+
+
 
     return(
         <div>
@@ -29,6 +37,13 @@ const VoteSystem = ({ vid, question, user, thumbsUp }) => {
                 <div></div>
             )}
             <Badge>{question.count}</Badge>
+            {user.authenticated && user.google==question.user.google ? (
+                <Button bsSize="xsmall" bsStyle='danger' onClick={clickRemove}>
+                    <FontAwesome name='trash' />
+                </Button>
+            ):(
+                <div></div>
+            )}
         </div>
     );
 };
@@ -42,4 +57,4 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps, { thumbsUp } )(VoteSystem);
+export default connect(mapStateToProps, { thumbsUp, remove } )(VoteSystem);
