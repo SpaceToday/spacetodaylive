@@ -2,7 +2,6 @@ import User from '../models/user';
 
 /* eslint-disable no-param-reassign */
 export default (req, accessToken, refreshToken, profile, done) => {
-    console.log(require('util').inspect(profile, { depth: null }));
     return User.findOne({ google: profile.id }, (findByGoogleIdErr, existingUser) => {
         if (existingUser) return done(null, existingUser);
 
