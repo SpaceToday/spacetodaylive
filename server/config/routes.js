@@ -12,8 +12,6 @@ const questionsController = controllers && controllers.questions;
 export default (app) => {
   // user routes
   if (usersController) {
-    app.post('/login', usersController.login);
-    app.post('/signup', usersController.signUp);
     app.post('/logout', usersController.logout);
     app.get('/owner/:vid', usersController.owner);
   } else {

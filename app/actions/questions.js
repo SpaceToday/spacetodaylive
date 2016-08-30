@@ -33,7 +33,7 @@ export function typing(text) {
 
 export function createQuestion(vid) {
     return (dispatch, getState) => {
-        let data = {
+        const data = {
             text: getState().question.newQuestion
         }
 

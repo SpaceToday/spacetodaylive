@@ -4,6 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from 'containers/App';
 import Main from 'containers/Main';
 import Intro from 'containers/Intro';
+import { isOwner } from 'actions/users';
 
 /*
  * @param {Redux Store}
@@ -11,30 +12,15 @@ import Intro from 'containers/Intro';
  * state from the store after it has been authenticated.
  */
 export default (store) => {
-  const requireAuth = (nextState, replace, callback) => {
-    const { user: { authenticated }} = store.getState();
-    if (!authenticated) {
-      replace({
-        pathname: '/login',
-        state: { nextPathname: nextState.location.pathname }
-      });
+    const ownerVerification =  (nextState, replace, callback) => {
+        store.dispatch(isOwner(nextState.params.id));
+        callback();
     }
-    callback();
-  };
 
-  const redirectAuth = (nextState, replace, callback) => {
-    const { user: { authenticated }} = store.getState();
-    if (authenticated) {
-      replace({
-        pathname: '/'
-      });
-    }
-    callback();
-  };
-  return (
-    <Route path="/" component={App}>
-      <IndexRoute component={Intro} />
-      <Route path="/:id" component={Main} />
-    </Route>
-  );
+    return (
+        <Route path="/" component={App}>
+            <IndexRoute component={Intro} />
+            <Route path="/:id" component={Main} onEnter={ownerVerification} />
+        </Route>
+    );
 };

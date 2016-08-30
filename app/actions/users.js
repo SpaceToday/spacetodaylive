@@ -72,3 +72,10 @@ export function logOut() {
       });
   };
 }
+
+export function isOwner(vid) {
+    return {
+        type: types.IS_OWNER,
+        promise: request['get'](`/owner/${vid}`)
+    }
+}

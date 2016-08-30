@@ -37,7 +37,7 @@ const VoteSystem = ({ vid, question, user, thumbsUp, remove }) => {
                 <div></div>
             )}
             <Badge>{question.count}</Badge>
-            {user.authenticated && user.google==question.user.google ? (
+            {user.authenticated && user.google==question.user.google || user.isOwner ? (
                 <Button bsSize="xsmall" bsStyle='danger' onClick={clickRemove}>
                     <FontAwesome name='trash' />
                 </Button>

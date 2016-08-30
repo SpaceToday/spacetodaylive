@@ -88,13 +88,31 @@ const google = (
     }
 }
 
+const isOwner = (
+    state = false,
+    action
+) => {
+    switch (action.type) {
+        case types.IS_OWNER_SUCCESS:
+            console.log(require('util').inspect(action.res, { depth: null }));
+            return true;
+        case types.LOGOUT_SUCCESS_USER:
+        case types.IS_OWNER_FAILURE:
+            return false;
+        default:
+            return state;
+
+    }
+}
+
 const userReducer = combineReducers({
     isLogin,
     isWaiting,
     authenticated,
     message,
     profile,
-    google
+    google,
+    isOwner
 });
 
 export default userReducer;

@@ -2,71 +2,51 @@ import User from '../models/user';
 import passport from 'passport';
 
 /**
- * POST /login
- */
-export function login(req, res, next) {
-  // Do email and password validation for the server
-  passport.authenticate('local', (authErr, user, info) => {
-    if (authErr) return next(authErr);
-    if (!user) {
-      return res.status(401).json({ message: info.message });
-    }
-    // Passport exposes a login() function on req (also aliased as
-    // logIn()) that can be used to establish a login session
-    return req.logIn(user, (loginErr) => {
-      if (loginErr) return res.status(401).json({ message: loginErr });
-      return res.status(200).json({
-        message: 'You have been successfully logged in.'
-      });
-    });
-  })(req, res, next);
-}
-
-/**
  * POST /logout
  */
 export function logout(req, res) {
     // Do email and password validation for the server
     req.logout();
-    let redirectUrl = req.query.state?req.query.state:"";
+    const redirectUrl = req.query.state?req.query.state:"";
     res.redirect(`/${redirectUrl}`);
 }
 
 /**
- * POST /signup
- * Create a new local account
+ * GET /owner/id
  */
-export function signUp(req, res, next) {
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  User.findOne({ email: req.body.email }, (findErr, existingUser) => {
-    if (existingUser) {
-      return res.status(409).json({ message: 'Account with this email address already exists!' });
-    }
-
-    return user.save((saveErr) => {
-      if (saveErr) return next(saveErr);
-      return req.logIn(user, (loginErr) => {
-        if (loginErr) return res.status(401).json({ message: loginErr });
-        return res.status(200).json({
-          message: 'You have been successfully logged in.'
-        });
-      });
-    });
-  });
-}
 
 export function owner (req, res, next) {
-    
+    try {
+        if(!req.user || !req.user.google || !req.user.tokens.youtube) return res.status(406).send('Denied');
 
+        const { user } = req;
+
+        const Youtube = require("youtube-api");
+        Youtube.authenticate({
+            type: "oauth",
+            token: user.tokens.youtube
+        });
+
+        Youtube.videos.list({
+            part: 'processingDetails',
+            id: req.params.vid
+        }, (err, data) => {
+            if(err){
+                //console.error(err);
+                return res.status(500).send('Server Error');
+            }
+            //console.log(require('util').inspect(data, { depth: null }));
+            return res.status(200).send(true);
+        })
+
+
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send('Server Error');
+    }
 }
 
 export default {
-  login,
   logout,
-  signUp,
   owner
 };
