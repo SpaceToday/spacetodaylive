@@ -13,7 +13,7 @@ export default class ChatPanel extends Component{
             <embed
                 fill
                 src={`https://www.youtube.com/live_chat?v=${this.props.vid}&embed_domain=${location.hostname}`}
-                style={{height:'65vh'}}/>)
+                style={{height:'65vh', width: '100%'}}/>)
             );
     }
 
@@ -24,7 +24,7 @@ export default class ChatPanel extends Component{
     render(){
         const { vid } = this.props;
         return(
-            <Panel collapsible header="Live Chat">
+            <Panel collapsible header="Live Chat" bsStyle="warning">
                 {this.state}
             </Panel>
         )

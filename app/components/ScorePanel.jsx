@@ -23,7 +23,7 @@ export default class ScorePanel extends Component{
     render(){
         const { vid } = this.props;
         return(
-            <Panel header="Perguntas em Orbita" bsStyle="info" collapsible eventKey="3">
+            <Panel header="Perguntas em Orbita" bsStyle="primary" collapsible eventKey="3">
                 <Scoreboard fill vid={vid} />
             </Panel>
         )

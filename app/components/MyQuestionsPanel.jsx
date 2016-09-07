@@ -23,7 +23,7 @@ const MyQuestionsPanel = ({ questions, vid, user, remove }) => {
     });
 
     return(
-        <Panel header="Minhas Perguntas" collapsible eventKey="2">
+        <Panel header="Minhas Perguntas" bsStyle="info" collapsible eventKey="2">
             <ListGroup fill>
                 {questionListItems}
             </ListGroup>
