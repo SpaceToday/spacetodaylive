@@ -16,7 +16,7 @@ const clientConfig = {
 // configure baseURL for axios requests (for serverside API calls)
 axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
 
-
+const trackingID  = "'UA-83872904-1'";
 const analtyicsScript =
   typeof trackingID === "undefined" ? ``
   :
@@ -39,7 +39,7 @@ const analtyicsScript =
  * however the assignement  does not, so it is undefined for the type check above.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting
  */
-const trackingID  = "'UA-83872904-1'";
+
 
 
 
