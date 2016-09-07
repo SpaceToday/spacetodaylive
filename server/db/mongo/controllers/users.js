@@ -32,6 +32,7 @@ export function owner (req, res, next) {
             id: req.params.vid
         }, (err, data) => {
             if(err){
+                //TODO return false when not user, not error 500
                 //console.error(err);
                 return res.status(500).send('Server Error');
             }

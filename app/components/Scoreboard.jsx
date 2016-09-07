@@ -30,8 +30,12 @@ const Scoreboard = ({ questions, vid, user, remove }) => {
             </MediaListItem>
         );
     });
+    const panelBodyStyle = {
+        overflowY: 'auto',
+        maxHeight: '65vh'
+    }
     return (
-        <MediaList>
+        <MediaList style={panelBodyStyle}>
             {questionListItems}
         </MediaList>
     );

@@ -10,12 +10,10 @@ const VoteSystem = ({ vid, question, user, thumbsUp, remove }) => {
     const hasVoted = question.thumbsUp.some(e=>e==user.google);
 
     const thumbsUpClick = () => {
-        console.log('HAS VOTED', hasVoted);
         thumbsUp(vid, question.id, !hasVoted);
     }
 
     const clickRemove = () => {
-        console.log('HERE');
         remove(vid, question.id);
     }
 
@@ -34,7 +32,7 @@ const VoteSystem = ({ vid, question, user, thumbsUp, remove }) => {
                     </Button>
 
             ):(
-                <div></div>
+                null
             )}
             <Badge>{question.count}</Badge>
             {user.authenticated && user.google==question.user.google || user.isOwner ? (
@@ -42,7 +40,7 @@ const VoteSystem = ({ vid, question, user, thumbsUp, remove }) => {
                     <FontAwesome name='trash' />
                 </Button>
             ):(
-                <div></div>
+                null
             )}
         </div>
     );

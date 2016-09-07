@@ -24,13 +24,20 @@ export function add(req, res) {
             text : req.body.text,
             vid: req.params.vid
         }
-        Question.create(data, (err) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).send(err);
+        Question.count({'user.google': req.user.google}, (err, count) => {
+            if(err || count>=3){
+                if(err) console.error(err);
+                return res.status(400).send(err || 'max questions reached');
+            }else{
+                Question.create(data, (err) => {
+                    if (err) {
+                        console.error(err);
+                        return res.status(400).send(err);
+                    }
+                    return res.status(200).send('OK');
+                });
             }
-            return res.status(200).send('OK');
-        });
+        })
     } catch (e) {
         console.error(e);
     }
@@ -50,7 +57,7 @@ export function update(req, res){
 
         Question.findOne(query, (err, question) => {
             if (err) {
-                console.log('Error on query!');
+                console.error('Error on query!', err);
                 return res.status(500).send('We failed to save for some reason');
             }
             const haveAlready = question.thumbsUp.some((e)=>e==user.google);

@@ -14,11 +14,4 @@ const Video = ({vid}) => {
 };
 
 
-function mapStateToProps(state, ownProps) {
-    return {
-        user: state.user,
-        vid: ownProps.vid
-    };
-}
-
-export default connect(mapStateToProps)(Video);
+export default Video;

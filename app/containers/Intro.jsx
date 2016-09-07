@@ -7,7 +7,7 @@ const Intro = () => {
     return (
       <Grid>
           <Row>
-              <Well>Welcome</Well>
+              <Well>Bem vindo</Well>
           </Row>
       </Grid>
     );

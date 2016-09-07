@@ -13,7 +13,7 @@ export default class ScorePanel extends Component{
         setInterval(() => {
             const { fecthQuestions } = this.props;
             fecthQuestions(vid);
-        }, 10000);
+        }, 20000);
     }
 
     componentWillUnmount() {
@@ -23,7 +23,7 @@ export default class ScorePanel extends Component{
     render(){
         const { vid } = this.props;
         return(
-            <Panel header="Perguntas em Orbita" >
+            <Panel header="Perguntas em Orbita" bsStyle="info" collapsible eventKey="3">
                 <Scoreboard fill vid={vid} />
             </Panel>
         )
