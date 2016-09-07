@@ -5,9 +5,9 @@ import { ResponsiveEmbed, Well } from 'react-bootstrap';
 const Video = ({vid}) => {
     const url = `https://www.youtube.com/embed/${vid}?autoplay=${__DEVSERVER__||__DEVCLIENT__?0:1}`
     return(
-        <div>
-            <ResponsiveEmbed a16by9>
-                <embed type="text/html" src={url} />
+        <div style={{boxShadow: '15px 15px 20px lightblue'}}>
+            <ResponsiveEmbed a16by9 >
+                <embed src={url} />
             </ResponsiveEmbed>
         </div>
     );
