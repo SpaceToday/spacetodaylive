@@ -96,6 +96,9 @@ export function update(req, res){
 
 export function remove(req, res){
     try {
+        if(!req.user || !req.user.google)
+            return res.status(406).send('User not defined');
+
         const { user, params } = req;
         const query = {
             id: params.qid,
