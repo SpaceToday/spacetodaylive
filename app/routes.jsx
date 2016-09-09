@@ -13,7 +13,9 @@ import { isOwner } from 'actions/users';
  */
 export default (store) => {
     const ownerVerification =  (nextState, replace, callback) => {
-        store.dispatch(isOwner(nextState.params.id));
+        const state = store.getState();
+        if(state.user && state.user.authenticated)
+            store.dispatch(isOwner(nextState.params.id));
         callback();
     }
 

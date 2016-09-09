@@ -8,7 +8,6 @@ export default class ChatPanel extends Component{
     }
 
     componentDidMount() {
-        console.log("HERE");
         this.setState( () => (
             <embed
                 fill

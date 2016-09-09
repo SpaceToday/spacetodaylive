@@ -53,8 +53,6 @@ const Main = ({ user, vid, createQuestion, typing, textOnBox, fecthQuestions, qu
 
 
 function mapStateToProps(state, ownProps) {
-    //console.log(require('util').inspect(state, { depth: null }));
-    //console.log(require('util').inspect(ownProps, { depth: null }));
     return {
         user: state.user,
         vid: ownProps.params.id,

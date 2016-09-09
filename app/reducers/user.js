@@ -94,8 +94,7 @@ const isOwner = (
 ) => {
     switch (action.type) {
         case types.IS_OWNER_SUCCESS:
-            console.log(require('util').inspect(action.res, { depth: null }));
-            return true;
+            return action.res.data;
         case types.LOGOUT_SUCCESS_USER:
         case types.IS_OWNER_FAILURE:
             return false;

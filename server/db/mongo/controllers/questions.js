@@ -1,15 +1,21 @@
 import Question from '../models/questions';
 import passport from 'passport';
 import md5 from 'spark-md5';
+import { isOwner } from '../../../youtube';
 
 export function all(req, res) {
-    Question.find({vid:req.params.vid}).exec((err, topics) => {
-        if (err) {
-            console.log('Error in first query');
-            return res.status(500).send('Something went wrong getting the data');
-        }
-        return res.json(topics);
-    });
+    try {
+        Question.find({vid:req.params.vid}).exec((err, questions) => {
+            if (err) {
+                console.error('Error on Query All Questions', err);;
+                return res.status(500).send('Something went wrong getting the data');
+            }
+            return res.json(questions);
+        });
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send('Something went wrong getting the data');
+    }
 }
 
 export function add(req, res) {
@@ -25,14 +31,16 @@ export function add(req, res) {
             vid: req.params.vid
         }
         Question.count({'user.google': req.user.google}, (err, count) => {
-            if(err || count>=3){
-                if(err) console.error(err);
-                return res.status(400).send(err || 'max questions reached');
+            if(err){
+                console.error('Error on query delete', err);
+                return res.status(500).send('Error on delete');
+            }else if(count>=3){
+                return res.status(400).send('max questions reached');
             }else{
                 Question.create(data, (err) => {
                     if (err) {
-                        console.error(err);
-                        return res.status(400).send(err);
+                        console.error('Error on query delete', err);
+                        return res.status(500).send(err);
                     }
                     return res.status(200).send('OK');
                 });
@@ -72,7 +80,7 @@ export function update(req, res){
                 question.count = question.thumbsUp.length;
                 question.save((err)=>{
                     if(err){
-                        console.log('Error on save!');
+                        console.error('Error on save!', err);
                         return res.status(500).send('We failed to save for some reason');
                     }
                     return res.status(200).send('Updated successfully');
@@ -88,28 +96,37 @@ export function update(req, res){
 
 export function remove(req, res){
     try {
-        const { user, params, body : { thumbsUp : isIncrement } } = req;
+        const { user, params } = req;
         const query = {
             id: params.qid,
             vid: params.vid
         }
         Question.findOne(query, (err, question) => {
             if (err) {
-                console.log('Error on delete');
+                console.error('Error on delete', err);
                 return res.status(500).send('We failed to delete for some reason');
             }
 
-            //TODO add owner of video
-            if(question.user.google==user.google){
+            function removeQuestion(question, res){
                 question.remove((err) => {
                     if (err) {
-                        console.log('Error on delete');
+                        console.error('Error on delete', err);
                         return res.status(500).send('We failed to delete for some reason');
                     }
                     return res.status(200).send('Removed Successfully');
                 })
+            }
+
+            if(question.user.google==user.google){
+                return removeQuestion(question, res);
             }else{
-                return res.status(406).send('Denied');
+                isOwner(params.vid, user, (isOwnerResp) => {
+                    if(isOwnerResp){
+                        return removeQuestion(question, res);
+                    }else {
+                        return res.status(406).send('Denied');
+                    }
+                })
             }
         });
     } catch (e) {

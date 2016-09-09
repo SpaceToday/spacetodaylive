@@ -1,6 +1,6 @@
 import User from '../models/user';
 import passport from 'passport';
-
+import { isOwner } from '../../../youtube';
 /**
  * POST /logout
  */
@@ -20,27 +20,9 @@ export function owner (req, res, next) {
         if(!req.user || !req.user.google || !req.user.tokens.youtube) return res.status(406).send('Denied');
 
         const { user } = req;
-
-        const Youtube = require("youtube-api");
-        Youtube.authenticate({
-            type: "oauth",
-            token: user.tokens.youtube
+        isOwner(req.params.vid, user, (isOwnerResp) => {
+            return res.status(200).send( isOwnerResp );
         });
-
-        Youtube.videos.list({
-            part: 'processingDetails',
-            id: req.params.vid
-        }, (err, data) => {
-            if(err){
-                //TODO return false when not user, not error 500
-                //console.error(err);
-                return res.status(500).send('Server Error');
-            }
-            //console.log(require('util').inspect(data, { depth: null }));
-            return res.status(200).send(true);
-        })
-
-
     } catch (e) {
         console.error(e);
         return res.status(500).send('Server Error');
