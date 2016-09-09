@@ -102,7 +102,7 @@ export function remove(req, res){
             vid: params.vid
         }
         Question.findOne(query, (err, question) => {
-            if (err) {
+            if (err || !question) {
                 console.error('Error on delete', err);
                 return res.status(500).send('We failed to delete for some reason');
             }
