@@ -3,9 +3,12 @@ import User from '../models/user';
 /* eslint-disable no-param-reassign */
 export default (req, accessToken, refreshToken, profile, done) => {
     return User.findOne({ google: profile.id }, (findByGoogleIdErr, existingUser) => {
-        if (existingUser) return done(null, existingUser);
-
-        const user = new User();
+        let user;
+        if (existingUser){
+            user = existingUser;
+        }else{
+            user = new User();
+        }
         user.google = profile.id;
         user.tokens.youtube = accessToken;
         user.profile.name = profile.displayName;
