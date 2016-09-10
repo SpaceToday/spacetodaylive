@@ -1,9 +1,13 @@
+import { google } from '../config/secrets';
 
 export function isOwner(vid, user, cb){
     const Youtube = require("youtube-api");
     Youtube.authenticate({
         type: "oauth",
-        token: user.tokens.youtube
+        refresh_token: user.tokens.youtube.refreshToken,
+        client_id: google.clientID,
+        client_secret: google.clientSecret,
+        redirect_url: google.callbackURL
     });
 
     Youtube.videos.list({

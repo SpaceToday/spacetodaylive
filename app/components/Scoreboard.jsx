@@ -15,7 +15,6 @@ const Scoreboard = ({ questions, vid, user, remove }) => {
             remove(vid, question.id);
         }
         return (
-            //TODO add style to my message
             <MediaListItem key={key} >
                 <MediaLeft>
                     <Image width={32} height={32} src={question.user.profile.picture} circle />

@@ -17,7 +17,7 @@ export function logout(req, res) {
 
 export function owner (req, res, next) {
     try {
-        if(!req.user || !req.user.google || !req.user.tokens.youtube) return res.status(406).send('Denied');
+        if(!req.user || !req.user.google) return res.status(406).send('Denied');
 
         const { user } = req;
         isOwner(req.params.vid, user, (isOwnerResp) => {

@@ -7,7 +7,10 @@ export default (req, accessToken, refreshToken, profile, done) => {
             user = new User();
         }
         user.google = profile.id;
-        user.tokens.youtube = accessToken;
+        user.tokens.youtube = {
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        }
         user.markModified('tokens');
         user.profile.name = profile.displayName;
         user.profile.picture = profile._json.items[0].snippet.thumbnails.default.url;

@@ -13,14 +13,19 @@ import mongoose from 'mongoose';
  */
 
 const UserSchema = new mongoose.Schema({
-  tokens: {type: Object , default: {}},
+  tokens:{
+      youtube:{
+          refreshToken:String,
+          accessToken: String
+      }
+  },
   profile: {
-    name: { type: String, default: '' },
-    picture: { type: String, default: '' }
+      name: { type: String, default: '' },
+      picture: { type: String, default: '' }
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  google: {}
+  google: String
 });
 
 export default mongoose.model('User', UserSchema);
