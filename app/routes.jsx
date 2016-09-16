@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
+import { fetchVoteData } from 'fetch-data';
 import App from 'containers/App';
 import Main from 'containers/Main';
 import Intro from 'containers/Intro';
