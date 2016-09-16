@@ -35,7 +35,7 @@ const Main = ({ user, vid, createQuestion, typing, textOnBox, fecthQuestions, qu
               <Col sm={5}>
                   {//TODO Accordion not working
                   }
-                <PanelGroup defaultActiveKey="2" accordion>
+                <PanelGroup >
                     <ScorePanel
                         fecthQuestions={fecthQuestions}
                         vid={vid} />
