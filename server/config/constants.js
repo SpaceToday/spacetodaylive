@@ -7,4 +7,6 @@ defaultExport.DB_TYPES = {
   NONE: 'NONE'
 };
 
+defaultExport.YOUTUBE_CHANNEL_ID = "UC_Fk7hHbl7vv_7K8tYqJd5A";
+
 module.exports = defaultExport;

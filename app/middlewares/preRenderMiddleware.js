@@ -7,4 +7,3 @@ function preRenderMiddleware({ routes, location, params }) {
 }
 
 export default preRenderMiddleware;
-

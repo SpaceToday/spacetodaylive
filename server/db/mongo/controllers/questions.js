@@ -1,5 +1,4 @@
 import Question from '../models/questions';
-import passport from 'passport';
 import md5 from 'spark-md5';
 import { isOwner } from '../../../youtube';
 

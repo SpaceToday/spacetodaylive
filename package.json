@@ -130,6 +130,6 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.12.2",
-    "youtube-api": "^2.0.2"
+    "youtube-api": "^2.0.2",
   }
 }
