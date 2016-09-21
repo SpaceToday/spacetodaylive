@@ -18,6 +18,7 @@ export function listChannelVideos(cb){
             console.error('YOUTUBE', err);
             return cb(err, null);
         }
+        //console.log(require('util').inspect(data, { depth: null }));
         return cb(null, data);
     });
 }
