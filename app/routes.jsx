@@ -6,7 +6,8 @@ import Main from 'containers/Main';
 import Intro from 'containers/Intro';
 import About from 'containers/About';
 import { isOwner } from 'actions/users';
-import {validateVideoID} from 'youtube-validate'
+
+import axios from 'axios';
 
 /*
  * @param {Redux Store}
@@ -16,15 +17,13 @@ import {validateVideoID} from 'youtube-validate'
 export default (store) => {
     const ownerVerification =  (nextState, replace, callback) => {
 
-        validateVideoID(nextState.params.id) // a standard youtube id
+        axios.get(`/youtube/exist/${nextState.params.id}`) // a standard youtube id
         .then(res => {
-            console.log(require('util').inspect(res, { depth: null }));
             const state = store.getState();
             if(state.user && state.user.authenticated)
                 store.dispatch(isOwner(nextState.params.id));
             callback();
         }).catch(e =>{
-            console.log(e);
             replace({
                 pathname: '/'
             });

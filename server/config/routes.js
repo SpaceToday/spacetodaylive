@@ -9,6 +9,7 @@ const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
 const questionsController = controllers && controllers.questions;
 const introController = controllers && controllers.intro;
+const youtubeController = controllers && controllers.youtube;
 
 export default (app) => {
   // user routes
@@ -71,4 +72,12 @@ export default (app) => {
   }else{
       console.warn(unsupportedMessage('intro routes'));
   }
+
+  if(youtubeController) {
+      app.get('/youtube/exist/:id', youtubeController.exist);
+  }else{
+      console.warn(unsupportedMessage('Youtube routes'));
+  }
+
+
 };

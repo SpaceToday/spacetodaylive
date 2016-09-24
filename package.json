@@ -131,6 +131,6 @@
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.12.2",
     "youtube-api": "^2.0.2",
-    "youtube-validate": "github:matiaszanolli/youtube-validator"
+    "youtube-validate": "^1.2.4"
   }
 }
