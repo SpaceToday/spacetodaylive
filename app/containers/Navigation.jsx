@@ -6,7 +6,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Image } from 'react-bootst
 import { Header, Collapse, Brand, Toggle, Text } from 'react-bootstrap/lib/Navbar';
 
 const Navigation = ({ user, logOut, vid }) => {
-    const authUrl = `/auth/google?vid=${vid}`;
+    const authUrl = `/auth/google${vid?`?vid=${vid}`:''}`;
     return (
         <Navbar inverse fluid>
             <Header>
