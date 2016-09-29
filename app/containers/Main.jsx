@@ -10,7 +10,7 @@ import { createQuestion, typing, fecthQuestions } from 'actions/questions';
 import FontAwesome from 'react-fontawesome';
 
 const Main = ({ user, vid, createQuestion, typing, textOnBox, fecthQuestions, questions }) => {
-    const authUrl = `/auth/google?vid=${vid}`;
+    const authUrl = `/auth/google?state=/v/${vid}`;
     return (
       <Grid fluid>
           <Row>
