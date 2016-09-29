@@ -7,6 +7,8 @@ const live = (
     action
 ) => {
     switch (action.type) {
+        case types.INTRO_PAST:
+            return action.data.filter(e=>e.snippet.liveBroadcastContent==="live")
         default:
             return state;
     }
@@ -17,6 +19,8 @@ const upcoming = (
     action
 ) => {
     switch (action.type) {
+        case types.INTRO_PAST:
+            return action.data.filter(e=>e.snippet.liveBroadcastContent==="upcoming") 
         default:
             return state;
     }
@@ -27,6 +31,8 @@ const past = (
     action
 ) => {
     switch (action.type) {
+        case types.INTRO_PAST:
+            return action.data;
         default:
             return state;
     }

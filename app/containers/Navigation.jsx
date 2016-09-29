@@ -5,13 +5,13 @@ import { logOut } from 'actions/users';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Image } from 'react-bootstrap';
 import { Header, Collapse, Brand, Toggle, Text } from 'react-bootstrap/lib/Navbar';
 
-const Navigation = ({ user, logOut, vid }) => {
-    const authUrl = `/auth/google?vid=${vid}`;
+const Navigation = ({ user, logOut, pathname }) => {
+    const authUrl = `/auth/google?state=${pathname}`;
     return (
         <Navbar inverse fluid>
             <Header>
                 <Brand>
-                    <a href="/">Space Today Live</a>
+                    <Link to={'/'}>Space Today Live</Link>
                 </Brand>
                 <Toggle />
             </Header>
@@ -36,8 +36,8 @@ const Navigation = ({ user, logOut, vid }) => {
 
 
 Navigation.propTypes = {
-  user: PropTypes.object,
-  logOut: PropTypes.func.isRequired
+    user: PropTypes.object,
+    logOut: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

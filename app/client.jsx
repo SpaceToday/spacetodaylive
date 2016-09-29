@@ -32,7 +32,7 @@ function onUpdate() {
   }
 
   store.dispatch({ type: types.CREATE_REQUEST });
-  preRenderMiddleware(this.state)
+  preRenderMiddleware(this.state, store)
   .then(data => {
     return store.dispatch({ type: types.REQUEST_SUCCESS, data });
   });

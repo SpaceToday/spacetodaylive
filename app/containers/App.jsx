@@ -14,10 +14,10 @@ import { Button, ResponsiveEmbed } from 'react-bootstrap';
  * A better explanation of react-router is available here:
  * https://github.com/rackt/react-router/blob/latest/docs/Introduction.md
  */
-const App = ({ children, vid }) => {
+const App = ({ children, pathname }) => {
   return (
     <div >
-      <Navigation vid={vid}  />
+      <Navigation pathname={pathname}  />
         {children}
     </div>
   );
@@ -29,7 +29,7 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        vid: ownProps.params.id
+        pathname: ownProps.location.pathname
     }
 }
 

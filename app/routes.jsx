@@ -34,7 +34,7 @@ export default (store) => {
     return (
         <Route path="/" component={App}>
             <IndexRoute component={Intro} fetchData={fetchIntroData} />
-            <Route path="/:id" component={Main} onEnter={ownerVerification} />
+            <Route path="/v/:id" component={Main} onEnter={ownerVerification} />
             <Route path="about" component={About}  />
         </Route>
     );

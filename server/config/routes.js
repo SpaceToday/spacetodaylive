@@ -32,7 +32,7 @@ export default (app) => {
             scope: [
                 'https://www.googleapis.com/auth/youtube.readonly'
             ],
-            state: req.query.vid
+            state: req.query.state
         })(req, res, next);
     });
 
@@ -42,8 +42,8 @@ export default (app) => {
     app.get('/auth/google/callback', (req, res, next) => {
         const redirectUrl = req.query.state?req.query.state:"";
         passport.authenticate('youtube', {
-            successRedirect: `/${redirectUrl}`,
-            failureRedirect: `/${redirectUrl}`
+            successRedirect: `${redirectUrl}`,
+            failureRedirect: `${redirectUrl}`
         })(req, res, next);
     });
   }
