@@ -11,15 +11,21 @@ import { DB_TYPE, ENV } from './appConfig';
 import { session as dbSession } from '../db';
 import gzip from 'compression';
 import helmet from 'helmet';
-import sslRedirect from 'heroku-ssl-redirect';
 
 
 export default (app) => {
   app.set('port', (process.env.PORT || 3000));
 
-  app.use(sslRedirect());
-
   if (ENV === 'production') {
+    app.use((req, res, next) => {
+        console.log('HEADERS', req.headers);
+        if (req.headers['x-forwarded-proto'] req.headers['x-forwarded-proto'] != 'https') {
+            res.redirect(302, 'https://' + req.hostname + req.originalUrl);
+        } else {
+            next();
+        }
+    })
+
     app.use(gzip());
     // Secure your Express apps by setting various HTTP headers. Documentation: https://github.com/helmetjs/helmet
     app.use(helmet());
