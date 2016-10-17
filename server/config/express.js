@@ -19,7 +19,7 @@ export default (app) => {
   if (ENV === 'production') {
     app.use((req, res, next) => {
         console.log('HEADERS', req.headers);
-        if (req.headers['x-forwarded-proto'] req.headers['x-forwarded-proto'] != 'https') {
+        if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] != 'https') {
             res.redirect(302, 'https://' + req.hostname + req.originalUrl);
         } else {
             next();
