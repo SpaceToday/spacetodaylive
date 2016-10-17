@@ -11,6 +11,7 @@ import { DB_TYPE, ENV } from './appConfig';
 import { session as dbSession } from '../db';
 import gzip from 'compression';
 import helmet from 'helmet';
+import sslRedirect from 'heroku-ssl-redirect';
 
 
 export default (app) => {
@@ -25,6 +26,8 @@ export default (app) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
+
+  app.use(sslRedirect());
 
   app.use(express.static(path.join(__dirname, '../..', 'public')));
 
