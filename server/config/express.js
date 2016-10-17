@@ -17,6 +17,8 @@ import sslRedirect from 'heroku-ssl-redirect';
 export default (app) => {
   app.set('port', (process.env.PORT || 3000));
 
+  app.use(sslRedirect());
+
   if (ENV === 'production') {
     app.use(gzip());
     // Secure your Express apps by setting various HTTP headers. Documentation: https://github.com/helmetjs/helmet
@@ -27,7 +29,6 @@ export default (app) => {
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
 
-  app.use(sslRedirect());
 
   app.use(express.static(path.join(__dirname, '../..', 'public')));
 
