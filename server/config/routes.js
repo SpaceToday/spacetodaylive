@@ -8,6 +8,8 @@ import { controllers, passport as passportConfig } from '../db';
 const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
 const questionsController = controllers && controllers.questions;
+const introController = controllers && controllers.intro;
+const youtubeController = controllers && controllers.youtube;
 
 export default (app) => {
   // user routes
@@ -30,7 +32,7 @@ export default (app) => {
             scope: [
                 'https://www.googleapis.com/auth/youtube.readonly'
             ],
-            state: req.query.vid
+            state: req.query.state
         })(req, res, next);
     });
 
@@ -40,8 +42,8 @@ export default (app) => {
     app.get('/auth/google/callback', (req, res, next) => {
         const redirectUrl = req.query.state?req.query.state:"";
         passport.authenticate('youtube', {
-            successRedirect: `/${redirectUrl}`,
-            failureRedirect: `/${redirectUrl}`
+            successRedirect: `${redirectUrl}`,
+            failureRedirect: `${redirectUrl}`
         })(req, res, next);
     });
   }
@@ -64,4 +66,18 @@ export default (app) => {
   } else {
     console.warn(unsupportedMessage('topics routes'));
   }
+
+  if(introController) {
+      app.get('/intro', introController.all);
+  }else{
+      console.warn(unsupportedMessage('intro routes'));
+  }
+
+  if(youtubeController) {
+      app.get('/youtube/exist/:id', youtubeController.exist);
+  }else{
+      console.warn(unsupportedMessage('Youtube routes'));
+  }
+
+
 };

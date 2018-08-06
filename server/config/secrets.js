@@ -6,7 +6,8 @@ export const sessionSecret = process.env.SESSION_SECRET || 'Your Session Secret 
 export const google = {
   clientID: process.env.GOOGLE_CLIENT_ID || JSON.parse(fs.readFileSync('server/config/client_secret.json', 'utf8')).web.client_id,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || JSON.parse(fs.readFileSync('server/config/client_secret.json', 'utf8')).web.client_secret,
-  callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback'
+  callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback',
+  apiKey: process.env.GOOGLE_API_KEY || JSON.parse(fs.readFileSync('server/config/client_secret.json', 'utf8')).api_key
 };
 
 export default {

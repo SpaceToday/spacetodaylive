@@ -22,7 +22,7 @@ const EntryBox = ({makeQuestion, typingQuestion, textOnBox, vid, questions, user
     return (
         <form>
             <FormGroup controlId="formControlsTextarea">
-                <InputGroup>
+                <InputGroup >
                     <FormControl
                         componentClass="textarea"
                         placeholder="Pergunte algo interessante"
@@ -31,12 +31,12 @@ const EntryBox = ({makeQuestion, typingQuestion, textOnBox, vid, questions, user
                     <InputGroupButton>
                         { questions.filter(e => e.user.google==user.google).length>=3?(
                             <OverlayTrigger trigger="focus" placement="bottom" overlay={popoverFocus}>
-                                <Button >
+                                <Button bsSize="large">
                                     Lançar!
                                 </Button>
                             </OverlayTrigger>
                         ):(
-                            <Button onClick={sendButton}>
+                            <Button bsSize="large" onClick={sendButton}>
                                 Lançar!
                             </Button>
                         ) }

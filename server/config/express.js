@@ -17,6 +17,14 @@ export default (app) => {
   app.set('port', (process.env.PORT || 3000));
 
   if (ENV === 'production') {
+    app.use((req, res, next) => {
+        if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] != 'https') {
+            res.redirect(302, 'https://' + req.hostname + req.originalUrl);
+        } else {
+            next();
+        }
+    })
+
     app.use(gzip());
     // Secure your Express apps by setting various HTTP headers. Documentation: https://github.com/helmetjs/helmet
     app.use(helmet());
@@ -25,6 +33,7 @@ export default (app) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
+
 
   app.use(express.static(path.join(__dirname, '../..', 'public')));
 
